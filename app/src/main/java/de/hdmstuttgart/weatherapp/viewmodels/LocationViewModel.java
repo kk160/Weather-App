@@ -35,24 +35,37 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Class containing the LocationViewModel instance and allowing to set and observe data
+ * */
 public class LocationViewModel extends ViewModel {
 
     private MutableLiveData<String> location = new MutableLiveData<>();;
     private static LocationViewModel instance;
-    static Context context;
-    LocationRequest locationRequest;
+    private LocationRequest locationRequest;
 
-    public static LocationViewModel getInstance(Context c) {
+    /**
+     * Method to get the LocationViewModel instance
+     *
+     * @param context of the current state of the application
+     * */
+    public static LocationViewModel getInstance(Context context) {
         if(instance == null){
-            instance = new ViewModelProvider((ViewModelStoreOwner) c).get(LocationViewModel.class);
+            instance = new ViewModelProvider((ViewModelStoreOwner) context).get(LocationViewModel.class);
         }
         return instance;
     }
 
+    /**
+     * Method to get location
+     * */
     public LiveData<String> getLocation(){
         return location;
     }
 
+    /**
+     * Method to request the current location
+     * */
     public void requestLocation(Context context) {
 
         locationRequest = LocationRequest.create();

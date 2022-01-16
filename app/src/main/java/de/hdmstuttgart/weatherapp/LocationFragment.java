@@ -46,6 +46,10 @@ public class LocationFragment extends Fragment {
         super.onAttach(context);
     }
 
+
+    /**
+     * Method to initiate WeatherViewModel
+     * */
     public void initWeatherViewModel(){
         WeatherViewModel.getInstance(view.getContext()).getData().observe(getViewLifecycleOwner(), weatherModel ->
                 locationText.setText(weatherModel.getCity().getName()));

@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kyril/Weather-App/app/src/main/res/layout/activity_main.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/kyril/Weather-App/app/src/main/res/layout/days_fragment.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/kyril/Weather-App/app/src/main/res/layout/days_list_item_view.xml" value="0.4" />
+        <entry key="..\:/Users/kyril/Weather-App/app/src/main/res/layout/hours_fragment.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/kyril/Weather-App/app/src/main/res/layout/hours_list_item_view.xml" value="0.536" />
+        <entry key="..\:/Users/kyril/Weather-App/app/src/main/res/layout/location_fragment.xml" value="0.14583333333333334" />
+        <entry key="..\:/Users/kyril/Weather-App/app/src/main/res/layout/search_fragment.xml" value="0.264" />
+        <entry key="..\:/Users/kyril/Weather-App/app/src/main/res/layout/weather_fragment.xml" value="0.14583333333333334" />
         <entry key="..\:/Users/kyril/wetter-app/app/src/main/res/drawable-v24/magnify.xml" value="0.2703125" />
         <entry key="..\:/Users/kyril/wetter-app/app/src/main/res/drawable-v24/map_marker.xml" value="0.2703125" />
         <entry key="..\:/Users/kyril/wetter-app/app/src/main/res/layout/activity_main.xml" value="0.264" />

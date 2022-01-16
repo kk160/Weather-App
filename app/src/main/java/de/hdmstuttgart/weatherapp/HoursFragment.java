@@ -34,16 +34,21 @@ public class HoursFragment extends Fragment {
         recyclerView = view.findViewById(R.id.hoursRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        initSharedViewModel();
+        initDayViewModel();
         return view;
     }
 
-
-    public void initSharedViewModel(){
+    /**
+     * Method to initiate DayViewModel
+     * */
+    public void initDayViewModel(){
         DayViewModel dayViewModel = new ViewModelProvider(requireActivity()).get(DayViewModel.class);
         dayViewModel.getSelected().observe(getViewLifecycleOwner(), this::initWeatherViewModel);
     }
 
+    /**
+     * Method to initiate WeatherViewModel and initiate Adapter
+     * */
     public void initWeatherViewModel(int index){
         WeatherViewModel.getInstance(view.getContext()).getData().observe(getViewLifecycleOwner(), weatherModel -> {
                 hourList = new ArrayList<>();

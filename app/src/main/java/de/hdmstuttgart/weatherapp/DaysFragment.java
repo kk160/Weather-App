@@ -33,12 +33,18 @@ public class DaysFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Method to initiate the RecyclerView
+     * */
     public void initRecyclerView(){
         recyclerView = view.findViewById(R.id.daysRecyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, false));
     }
 
+    /**
+     * Method to initiate WeatherViewModel and initiate Adapter
+     * */
     public void initWeatherViewModel(){
         WeatherViewModel.getInstance(view.getContext()).getData().observe(getViewLifecycleOwner(), weatherModel -> {
             List<Day> dayList = new ArrayList<>();

@@ -11,18 +11,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationRequest;
-
 import de.hdmstuttgart.weatherapp.viewmodels.LocationViewModel;
 import de.hdmstuttgart.weatherapp.viewmodels.WeatherViewModel;
 
 public class MainActivity extends AppCompatActivity implements LocationFragment.OnInteractionListener, SearchFragment.OnInteractionListenerSF {
 
     private LocationFragment locationFragment;
-    //Google's API for location service
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    LocationRequest locationRequest;
+    private DaysFragment daysFragment;
+    private WeatherFragment weatherFragment;
+    private HoursFragment hoursFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +58,9 @@ public class MainActivity extends AppCompatActivity implements LocationFragment.
 
     public void assignFragments() {
         locationFragment = new LocationFragment();
-        DaysFragment daysFragment = new DaysFragment();
-        WeatherFragment weatherFragment = new WeatherFragment();
-        HoursFragment hoursFragment = new HoursFragment();
+        daysFragment = new DaysFragment();
+        weatherFragment = new WeatherFragment();
+        hoursFragment = new HoursFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.replace(R.id.containerOne, locationFragment);
@@ -79,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements LocationFragment.
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.replace(R.id.containerOne, searchFragment);
+        fragmentTransaction.remove(daysFragment);
+        fragmentTransaction.remove(weatherFragment);
+        fragmentTransaction.remove(hoursFragment);
         fragmentTransaction.commit();
     }
 
@@ -87,6 +87,9 @@ public class MainActivity extends AppCompatActivity implements LocationFragment.
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setReorderingAllowed(true);
         fragmentTransaction.replace(R.id.containerOne, locationFragment);
+        fragmentTransaction.replace(R.id.containerTwo, daysFragment);
+        fragmentTransaction.replace(R.id.containerThree, weatherFragment);
+        fragmentTransaction.replace(R.id.containerFour, hoursFragment);
         fragmentTransaction.commit();
     }
 }
