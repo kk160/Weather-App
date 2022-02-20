@@ -7,9 +7,8 @@ import androidx.lifecycle.ViewModel;
 public class HourViewModel extends ViewModel {
     private final MutableLiveData<Integer> selected = new MutableLiveData<>(0);
 
-
     /**
-     * Method to ser selected
+     * Method to set selected
      * */
     public void select(int i){
         selected.setValue(i);

@@ -17,9 +17,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-
 import de.hdmstuttgart.weatherapp.viewmodels.HourViewModel;
 import de.hdmstuttgart.weatherapp.viewmodels.LocationViewModel;
 import de.hdmstuttgart.weatherapp.viewmodels.WeatherViewModel;
@@ -31,8 +28,6 @@ public class SearchFragment extends Fragment {
     private Button searchButton;
     private Button gpsButton;
     private OnInteractionListenerSF listener;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-
 
     @Nullable
     @Override
@@ -56,27 +51,31 @@ public class SearchFragment extends Fragment {
         super.onAttach(context);
     }
 
+    /**
+     * Methode to change the location
+     * */
     public void setSearchButtonOnClick(){
         searchButton.setOnClickListener(v -> {
             WeatherViewModel.getInstance(view.getContext()).setLocation(String.valueOf(searchField.getText()));
             HourViewModel hourViewModel = new ViewModelProvider(requireActivity()).get(HourViewModel.class);
             hourViewModel.select(0);
-            listener.changeToLocationFragment();
-        });
+                LoadingDialog.getLoadingDialog((Activity) getContext()).startLoadingDialog();
+                listener.changeToLocationFragment();
+            });
     }
 
+    /**
+     * Methode to get the current GPS location after clicking the button
+     * */
     public void setGpsButtonOnClick(){
         gpsButton.setOnClickListener(v -> {
             HourViewModel hourViewModel = new ViewModelProvider(requireActivity()).get(HourViewModel.class);
             hourViewModel.select(0);
 
-            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.getContext());
             //check permission for location
             if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 LocationViewModel.getInstance(view.getContext()).requestLocation(view.getContext());
-                LocationViewModel.getInstance(view.getContext()).getLocation().observe(getViewLifecycleOwner(), string -> {
-                    WeatherViewModel.getInstance(view.getContext()).setLocation(string);
-                });
+                LocationViewModel.getInstance(view.getContext()).getLocation().observe(getViewLifecycleOwner(), string -> WeatherViewModel.getInstance(view.getContext()).setLocation(string));
             }
             else {
                 ActivityCompat.requestPermissions((Activity) view.getContext(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
@@ -85,6 +84,9 @@ public class SearchFragment extends Fragment {
         });
     }
 
+    /**
+     * Interface to change fragment
+     * */
     public interface OnInteractionListenerSF{
         void changeToLocationFragment();
     }

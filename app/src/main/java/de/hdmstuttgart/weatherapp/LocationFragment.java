@@ -1,5 +1,6 @@
 package de.hdmstuttgart.weatherapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,8 +33,11 @@ public class LocationFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Interface to change fragment
+     * */
     public interface OnInteractionListener {
-        void changeFragment();
+        void changeToSearchFragment();
     }
 
     @Override
@@ -46,16 +50,27 @@ public class LocationFragment extends Fragment {
         super.onAttach(context);
     }
 
-
     /**
      * Method to initiate WeatherViewModel
      * */
     public void initWeatherViewModel(){
-        WeatherViewModel.getInstance(view.getContext()).getData().observe(getViewLifecycleOwner(), weatherModel ->
-                locationText.setText(weatherModel.getCity().getName()));
+        WeatherViewModel.getInstance(view.getContext()).getData().observe(getViewLifecycleOwner(), weatherModel ->{
+            locationText.setText(weatherModel.getCity().getName());
+            new Thread(() -> {
+                try {
+                    Thread.sleep(1000);
+                    LoadingDialog.getLoadingDialog((Activity) getContext()).endLoadingDialog();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        });
     }
 
+    /**
+     * Method to change fragment when icon is clicked
+     * */
     public void iconClicked(){
-        iconSearch.setOnClickListener(v -> listener.changeFragment());
+        iconSearch.setOnClickListener(v -> listener.changeToSearchFragment());
     }
 }

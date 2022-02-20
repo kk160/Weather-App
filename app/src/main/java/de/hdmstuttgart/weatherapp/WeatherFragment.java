@@ -36,15 +36,21 @@ public class WeatherFragment extends Fragment {
         feelLike = view.findViewById(R.id.feel_like);
         icon = view.findViewById(R.id.iconWeather);
 
-        initSharedViewModel();
+        initHourViewModel();
         return view;
     }
 
-    public void initSharedViewModel(){
+    /**
+     * Method to initiate HourViewModel
+     * */
+    public void initHourViewModel(){
         HourViewModel hourViewModel = new ViewModelProvider(requireActivity()).get(HourViewModel.class);
         hourViewModel.getSelected().observe(getViewLifecycleOwner(), this::initWeatherViewModel);
     }
 
+    /**
+     * Methode to initiate WeatherViewModel and set the data in the UI
+     * */
     @SuppressLint("SetTextI18n")
     public void initWeatherViewModel(int index){
         WeatherViewModel.getInstance(view.getContext()).getData().observe(getViewLifecycleOwner(), weatherModel -> {

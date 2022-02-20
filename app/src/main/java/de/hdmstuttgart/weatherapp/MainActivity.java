@@ -25,35 +25,38 @@ public class MainActivity extends AppCompatActivity implements LocationFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initLocation();
 
-        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            LocationViewModel.getInstance(MainActivity.this).requestLocation(MainActivity.this);
-            LocationViewModel.getInstance(MainActivity.this).getLocation().observe(MainActivity.this, string -> {
-                WeatherViewModel.getInstance(MainActivity.this).setLocation(string);
-            });
-        }
-        else {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-        }
-        assignFragments();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-
          if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
              LocationViewModel.getInstance(MainActivity.this).requestLocation(MainActivity.this);
              LifecycleOwner lifecycleOwner = MainActivity.this;
-             LocationViewModel.getInstance(MainActivity.this).getLocation().observe(lifecycleOwner, string -> {
-                 WeatherViewModel.getInstance(MainActivity.this).setLocation(string);
-             });
+             LocationViewModel.getInstance(MainActivity.this).getLocation().observe(lifecycleOwner, string -> WeatherViewModel.getInstance(MainActivity.this).setLocation(string));
+             assignFragments();
+
          } else {
                 WeatherViewModel.getInstance(MainActivity.this).setLocation("New York");
                 Toast.makeText(this, "Permission Denied, Default City: New York", Toast.LENGTH_LONG).show();
-         }
+                LoadingDialog.getLoadingDialog(this).startLoadingDialog();
+                assignFragments();
 
+         }
+    }
+
+    public void initLocation(){
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            LocationViewModel.getInstance(MainActivity.this).requestLocation(MainActivity.this);
+            LocationViewModel.getInstance(MainActivity.this).getLocation().observe(MainActivity.this, string -> WeatherViewModel.getInstance(MainActivity.this).setLocation(string));
+            assignFragments();
+        }
+        else {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
     }
 
     public void assignFragments() {
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements LocationFragment.
     }
 
     @Override
-    public void changeFragment() {
+    public void changeToSearchFragment() {
         SearchFragment searchFragment = new SearchFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setReorderingAllowed(true);

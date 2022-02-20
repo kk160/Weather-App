@@ -2,106 +2,125 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/black2"
+    android:background="@drawable/wetterwolken"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/StadtNameEingeben"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="31dp"
+        android:text="Tippe eine Stadt ein"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/searchField"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/GPSTV"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
-            android:text="Nutze deine aktuelle Position"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="25dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchField"
-            tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/GPSTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="1dp"
+        android:text="Nutze deine aktuelle Position"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/gpsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchField"
+        tools:ignore="MissingConstraints" />
 
-        <ImageView
-            android:id="@+id/search_icon"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="24dp"
-            android:src="@drawable/ic_search"
-            app:layout_constraintEnd_toStartOf="@+id/searchField"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/StadtNameEingeben"
-            app:tint="@color/white" />
+    <EditText
+        android:id="@+id/searchField"
+        android:layout_width="231dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="29dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/GPSTV"
+        app:layout_constraintEnd_toStartOf="@+id/searchButton"
+        app:layout_constraintStart_toEndOf="@+id/search_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
-        <Button
-            android:id="@+id/searchButton"
-            android:layout_width="94dp"
-            android:layout_height="49dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="20dp"
-            android:text="search"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toEndOf="@+id/searchField"
-            app:layout_constraintTop_toBottomOf="@+id/StadtNameEingeben" />
+    <ImageView
+        android:id="@+id/search_icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="92dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toTopOf="@+id/GPSTV"
+        app:layout_constraintEnd_toStartOf="@+id/searchField"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StadtNameEingeben"
+        app:layout_constraintVertical_bias="0.555"
+        app:tint="@color/white" />
 
-        <TextView
-            android:id="@+id/StadtNameEingeben"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_marginStart="20dp"
-            android:text="Tippe eine Stadt ein"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="25dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/gps_icon"
+        android:layout_width="35dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="412dp"
+        android:src="@drawable/ic_gps"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gpsButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GPSTV"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/white" />
 
-        <Button
-            android:id="@+id/gpsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="21dp"
-            android:background="@null"
-            android:text="Use GPS location"
-            android:textColor="@color/white"
-            app:layout_constraintStart_toEndOf="@+id/gps_icon"
-            app:layout_constraintTop_toBottomOf="@+id/GPSTV" />
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="94dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
+        android:text="search"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/GPSTV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/searchField"
+        app:layout_constraintTop_toBottomOf="@+id/StadtNameEingeben"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <ImageView
-            android:id="@+id/gps_icon"
-            android:layout_width="35dp"
-            android:layout_height="34dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginEnd="47dp"
-            android:src="@drawable/ic_gps"
-            app:layout_constraintEnd_toStartOf="@+id/gpsButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/GPSTV"
-            app:tint="@color/white" />
-
-        <EditText
-            android:id="@+id/searchField"
-            android:layout_width="231dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="12dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/searchButton"
-            app:layout_constraintStart_toEndOf="@+id/search_icon"
-            app:layout_constraintTop_toBottomOf="@+id/StadtNameEingeben"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/gpsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="405dp"
+        android:background="@null"
+        android:text="Use GPS location"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gps_icon"
+        app:layout_constraintTop_toBottomOf="@+id/GPSTV" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
